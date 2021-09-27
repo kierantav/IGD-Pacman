@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PacStudent : MonoBehaviour
 {
@@ -52,8 +53,19 @@ public class PacStudent : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
+        
         if (col.gameObject.name == "Walls") {
             Debug.Log("Collision Detected!");
+        }
+
+    }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.name == "Pelettes")
+        {
+            Tilemap map = col.gameObject.GetComponentInParent<Tilemap>();
+            Vector3Int removePos = map.WorldToCell(transform.position);
+            map.SetTile(removePos, null);
         }
     }
 }
