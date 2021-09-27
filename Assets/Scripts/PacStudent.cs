@@ -10,10 +10,12 @@ public class PacStudent : MonoBehaviour
 
     [SerializeField]
     private float rotationSpeed;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //animator = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,10 +31,13 @@ public class PacStudent : MonoBehaviour
 
         transform.Translate(movement * speed * magnitude * Time.deltaTime, Space.World);
 
-        if (movement != Vector2.zero) {
+        if (movement != Vector2.zero)
+        {
             Quaternion direction = Quaternion.LookRotation(Vector3.forward, -movement);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, direction, rotationSpeed * Time.deltaTime);
         }
+
+
         // Rotate Pac-Student
         /*if (Input.GetKey(KeyCode.W)) {
             transform.Rotate(0, 0, 180, Space.World);
@@ -53,8 +58,9 @@ public class PacStudent : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        
-        if (col.gameObject.name == "Walls") {
+
+        if (col.gameObject.name == "Walls")
+        {
             Debug.Log("Collision Detected!");
         }
 
@@ -65,7 +71,13 @@ public class PacStudent : MonoBehaviour
         {
             Tilemap map = col.gameObject.GetComponentInParent<Tilemap>();
             Vector3Int removePos = map.WorldToCell(transform.position);
+            Debug.Log(removePos);
             map.SetTile(removePos, null);
+        }
+
+        if (col.gameObject.name == "Ghosts")
+        {
+            Destroy(this.gameObject);
         }
     }
 }

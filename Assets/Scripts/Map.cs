@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Map : MonoBehaviour
 { 
     public Sprite[] sprites;
+
+    public float time = 0.0f;
+    public float increase = 0.2f;
     
     //int Vertical, Horizontal;
 
@@ -29,8 +33,27 @@ public class Map : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        time += Time.deltaTime;
+
+        if (time >= increase) {
+            time -= increase;
+
+            Tilemap map = GetComponent<Tilemap>();
+
+            foreach (var position in map.cellBounds.allPositionsWithin) {
+                Debug.Log(position);
+                if (!map.HasTile(position)) {
+                    continue;
+                }
+
+                // find each super pelette and do stuff
+            }
+
+            //Debug.Log(removePos);
+
+        }
         //Debug.Log(cellLayout);
-        sprites = Resources.LoadAll<Sprite>("Walls");
+        //sprites = Resources.LoadAll<Sprite>("Walls");
         //Debug.Log(sprites);
         //Vertical = (int)Camera.main.orthographicSize;
         //Horizontal = Vertical * (Screen.width / Screen.height);
@@ -43,12 +66,7 @@ public class Map : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.name == "") { 
-            
-        }
-    }
+    
 
     private void spawnTile(int x, int y, int value) {
         //GameObject sprite = new GameObject("X: " + x + "Y:" + y);
