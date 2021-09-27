@@ -5,6 +5,7 @@ using UnityEngine;
 public class Map : MonoBehaviour
 { 
     public Sprite[] sprites;
+    //int Vertical, Horizontal;
 
     int[,] levelMap = 
     {
@@ -27,18 +28,22 @@ public class Map : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Vertical = (int)Camera.main.orthographicSize;
+        //Horizontal = Vertical * (Screen.width / Screen.height);
 
-        /*for (int row = 0; row < levelMap.GetLength(0); row++)
+        gameObject.AddComponent<SpriteRenderer>();
+
+        for (int row = 0; row < levelMap.Length; row++)
         {
-            for (int col = 0; col < levelMap.GetLength(1); col++)
+            for (int col = 0; col < levelMap.Length-1; col++)
             {
-                switch (col)
+                switch (levelMap[row, col])
                 {
                     case 0:
 
                         break;
                     case 1:
+
                         break;
                     case 2:
                         break;
@@ -54,7 +59,7 @@ public class Map : MonoBehaviour
                         break;
                 }
             }
-        }*/
+        }
     }
 
     // Update is called once per frame
@@ -64,7 +69,7 @@ public class Map : MonoBehaviour
     }
 
     private void spawnTile(int x, int y, int value) {
-        GameObject sprite = new GameObject("X: " + x + "Y:" + y);
-        //sprite.transform.position = (x);
+        //GameObject sprite = new GameObject("X: " + x + "Y:" + y);
+        //sprite.transform.position = new Vector3(x - (Horizontal - 0.5f), y - (Vertical - 0.5f));
     }  
 }
