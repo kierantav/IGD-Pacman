@@ -49,4 +49,11 @@ public class PacStudent : MonoBehaviour
             transform.Rotate(0, 0, -90, Space.World);
         }*/
     }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.name == "Walls") {
+            Debug.Log("Collision Detected!");
+        }
+    }
 }

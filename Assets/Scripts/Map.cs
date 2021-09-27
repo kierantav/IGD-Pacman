@@ -5,6 +5,7 @@ using UnityEngine;
 public class Map : MonoBehaviour
 { 
     public Sprite[] sprites;
+    
     //int Vertical, Horizontal;
 
     int[,] levelMap = 
@@ -28,44 +29,25 @@ public class Map : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Debug.Log(cellLayout);
+        sprites = Resources.LoadAll<Sprite>("Walls");
+        //Debug.Log(sprites);
         //Vertical = (int)Camera.main.orthographicSize;
         //Horizontal = Vertical * (Screen.width / Screen.height);
-
-        gameObject.AddComponent<SpriteRenderer>();
-
-        for (int row = 0; row < levelMap.Length; row++)
-        {
-            for (int col = 0; col < levelMap.Length-1; col++)
-            {
-                switch (levelMap[row, col])
-                {
-                    case 0:
-
-                        break;
-                    case 1:
-
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.name == "") { 
+            
+        }
     }
 
     private void spawnTile(int x, int y, int value) {
