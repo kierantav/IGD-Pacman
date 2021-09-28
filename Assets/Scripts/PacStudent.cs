@@ -75,7 +75,13 @@ public class PacStudent : MonoBehaviour
             map.SetTile(removePos, null);
         }
 
-        if (col.gameObject.name == "Ghosts")
+        if (col.gameObject.name == "PowerPelettes") {
+            Tilemap map = col.gameObject.GetComponentInParent<Tilemap>();
+            Vector3Int removePos = map.WorldToCell(transform.position);
+            map.SetTile(removePos, null);
+        }
+
+            if (col.gameObject.name == "Ghosts")
         {
             Destroy(this.gameObject);
         }
